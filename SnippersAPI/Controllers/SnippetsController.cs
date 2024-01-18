@@ -14,7 +14,7 @@ namespace SnippersAPI.Controllers
             _snippetService = snippetService;
         }
 
-        [HttpGet("Snippets")]
+        [HttpGet]
         public async Task<ActionResult<ServiceResponse<GetSnippetDto>>> GetAllSnippets()
         {
             return Ok(await _snippetService.GetAllSnippets());

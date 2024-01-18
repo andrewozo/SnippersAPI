@@ -2,6 +2,7 @@ global using Microsoft.EntityFrameworkCore;
 global using SnippersAPI.Models;
 global using SnippersAPI.DTOS;
 using SnippersAPI.Data;
+using SnippersAPI.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+builder.Services.AddScoped<ISnippetService, SnippetService>();
 
 var app = builder.Build();
 
