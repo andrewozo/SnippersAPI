@@ -2,10 +2,10 @@
 {
     public interface ISnippetService
     {
-        Task<List<GetSnippetDto>> GetAllSnippets();
+        Task<ServiceResponse<List<GetSnippetDto>>> GetAllSnippets();
 
-        Task<GetSnippetDto> GetSnippetById(int id);
+        Task<ServiceResponse<GetSnippetDto>> GetSnippetById(int id);
 
-        Task<AddSnippetDto> AddSnippet(AddSnippetDto newSnippet);
+        Task<ServiceResponse<List<GetSnippetDto>>> AddSnippet(AddSnippetDto newSnippet);
     }
 }
