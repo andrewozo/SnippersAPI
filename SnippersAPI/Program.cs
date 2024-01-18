@@ -1,3 +1,10 @@
+global using Microsoft.EntityFrameworkCore;
+global using SnippersAPI.Models;
+global using SnippersAPI.DTOS;
+
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
