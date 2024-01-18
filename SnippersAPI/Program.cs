@@ -1,11 +1,13 @@
 global using Microsoft.EntityFrameworkCore;
 global using SnippersAPI.Models;
 global using SnippersAPI.DTOS;
-
-
+using SnippersAPI.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<DataContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add services to the container.
 
