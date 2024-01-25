@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using SnippersAPI.DTOS;
+using SnippersAPI.DTOS.Snippet;
 using SnippersAPI.Services;
 
 namespace SnippersAPI.Controllers

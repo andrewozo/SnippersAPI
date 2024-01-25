@@ -1,4 +1,4 @@
-﻿using SnippersAPI.DTOS;
+﻿using SnippersAPI.DTOS.Snippet;
 
 namespace SnippersAPI.Services
 {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using SnippersAPI.Data;
-using SnippersAPI.DTOS;
-using SnippersAPI.Services;
+using SnippersAPI.DTOS.Snippet;
 
 namespace SnippersAPI.Services
 {
@@ -19,7 +18,7 @@ namespace SnippersAPI.Services
         {
             var serviceResponse = new ServiceResponse<List<GetSnippetDto>>();
             var dbSnippets = await _context.Snippets.ToListAsync();
-           serviceResponse.Data = dbSnippets.Select(snip => _mapper.Map<GetSnippetDto>(snip)).ToList();
+            serviceResponse.Data = dbSnippets.Select(snip => _mapper.Map<GetSnippetDto>(snip)).ToList();
             return serviceResponse;
         }
 

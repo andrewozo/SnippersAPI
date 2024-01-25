@@ -1,4 +1,4 @@
-﻿namespace SnippersAPI.DTOS
+﻿namespace SnippersAPI.DTOS.Snippet
 {
     public class GetSnippetDto
     {
