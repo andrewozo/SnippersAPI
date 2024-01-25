@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SnippersAPI.DTOS;
 
 namespace SnippersAPI
 {

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using SnippersAPI.Data;
+using SnippersAPI.DTOS;
+using SnippersAPI.Services;
 
 namespace SnippersAPI.Services
 {

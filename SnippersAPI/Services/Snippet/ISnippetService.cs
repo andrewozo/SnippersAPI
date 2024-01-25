@@ -1,4 +1,6 @@
-﻿namespace SnippersAPI.Services
+﻿using SnippersAPI.DTOS;
+
+namespace SnippersAPI.Services
 {
     public interface ISnippetService
     {
