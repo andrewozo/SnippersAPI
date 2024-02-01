@@ -1,4 +1,8 @@
 ﻿using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -30,8 +34,11 @@ namespace SnippersAPI.Data
             {
                 response.Success = false;
                 response.Message = "Incorrect Password";
+            } else
+            {
+                response.Data = CreateToken(user);
             }
-            response.Data = user.Email;
+            
             return response;
         }
 
@@ -86,6 +93,39 @@ namespace SnippersAPI.Data
                 var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return computedHash.SequenceEqual(passwordHash);
             }
+        }
+
+        private string CreateToken(User user)
+        {
+            var claims = new List<Claim> {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Email),
+            };
+
+            var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
+
+            if (appSettingsToken == null) {
+                throw new Exception("AppSettings Token is null");
+            }
+
+            SymmetricSecurityKey key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(appSettingsToken));
+
+            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256Signature);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = creds
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+
+            SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
+
+           return tokenHandler.WriteToken(token);
+
+            
         }
 
 
