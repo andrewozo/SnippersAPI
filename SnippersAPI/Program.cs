@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Filters;
 using Microsoft.OpenApi.Models;
+using Auth0.AspNetCore.Authentication;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,6 +30,12 @@ builder.Services.AddSwaggerGen(config =>
         Type = SecuritySchemeType.ApiKey
     });
     config.OperationFilter<SecurityRequirementsOperationFilter>();
+});
+
+builder.Services.AddAuth0WebAppAuthentication(options =>
+{
+    options.Domain = builder.Configuration["Auth0:Domain"]!;
+    options.ClientId = builder.Configuration["Auth0:ClientId"]!;
 });
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
